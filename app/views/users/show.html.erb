@@ -1,0 +1,4 @@
+<h1>ユーザー情報</h1>
+
+<p>ユーザー名:<%= @user.name %></p>
+<p><%= link_to 'アカウント削除', unsubscribe_path(@user), method: :delete, data: { confirm: '本当にアカウント削除しますか？' } %></p>
