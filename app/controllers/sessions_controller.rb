@@ -11,15 +11,20 @@ class SessionsController < ApplicationController
     # 上記で検索したユーザーのnameと入力されたpasswordが正しい場合
     # authenticateは引数に渡された文字列(パスワード)をハッシュ化した値と、データベース内にあるpassword_digestカラムの値を比較する
     if user && user.authenticate(params[:session][:password])
+      # 転送先URLを取得(ユーザーがログイン前にアクセスしていたページ)
+      forwarding_url = session[:forwarding_url]
+      reset_session      # ログインの直前に必ずこれを書くこと 他の人が同じPCを使うときなどにログインした人のみ閲覧可能なページを見れてしまうため?
       # ログインする app/helpers/sessions_helper.rbで定義
       log_in user
-      # ホーム画面に遷移
-      #redirect_to root_url
+      # forwarding_urlがある場合はそこにリダイレクトし、nilの場合はホーム画面に遷移
+      redirect_to forwarding_url || ramunelist_url #root_url
     else
       # フラッシュメッセージを表示
-      flash.now[:danger] = '正しいユーザー名または、パスワードを入力してください'
-      # newアクションに移動
-      render 'new'
+      flash[:danger] = '正しいユーザー名または、パスワードを入力してください'
+      # newアクションに移動(renderだとなぜかフラッシュメッセージが表示されないためredirect_toに変更)
+      render 'new', status: :unprocessable_entity
+      # ログイン画面に遷移
+      #redirect_to login_path
     end
   end
 

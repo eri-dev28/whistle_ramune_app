@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       # フラッシュメッセージを表示
       flash[:info] = "ようこそ"
-      #redirect_to root_url
+      redirect_to root_url
     # データベースに保存できなかった場合
     else
       # newアクションに遷移 登録画面に戻る

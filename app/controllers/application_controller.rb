@@ -4,20 +4,20 @@ class ApplicationController < ActionController::Base
   # (ApplicationControllerクラスを継承すると使用できる) heplerメソッドはデフォルトで全てのviewファイルから呼び出せる includeは読み込み
   include SessionsHelper
 
-  def hello
-    render html: "hello, world!"
-  end
-
   # クラス内での呼び出しのみ可能 継承先のクラスでは呼び出せる
   private
 
     # application_controller.rbに追加することですべてのコントローラーで利用できる
-    # ログイン済みユーザーかどうか確認
+    # ユーザーのログインを確認する
     def logged_in_user
-      # ユーザーがログインしていないことの確認 app/helpers/sessions_helper.rbで定義(ユーザーがログインしていればtrue、その他ならfalseを返す)
+      # ログインしていなかった場合
       unless logged_in?
-        # ログイン画面に遷移する
-        redirect_to login_url
+        # アクセスしようとしたURLを保存する sessions_helper.rbで定義 フレンドリーフォワーディング
+        store_location
+        # ログインを促すフラッシュメッセージを出力
+        # ログインページに遷移する ステータスコードは303 リソースが別の場所にあるに設定
+        redirect_to login_url, status: :see_other
       end
     end
+
 end

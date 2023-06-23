@@ -35,4 +35,15 @@ module SessionsHelper
     # @current_userにnilを代入する
     @current_user = nil
   end
+
+  # アクセスしようとしたURLを保存する(フレンドリーフォワーディング)
+  def store_location
+    # session変数の:forwarding_urlキーに保存している
+    # request.original_urlでリクエスト先が取得できる
+    # if request.get?はGETリクエストが送られた時だけ実行する処理(ユーザーがセッション用のcookieを手動で削除してフォームから送信するケースなどがあるため
+    #                                                                                                               ↑どういう動きか想像があまりつかない)
+    #                                                           (POSTなどのリクエストを期待しているURLに対してリダイレクト経由でGETリクエストが送信されてしまうため
+    #                                                                                                               ↑これはなんとなく分かる気がする)
+    session[:forwarding_url] = request.original_url if request.get?
+  end
 end
