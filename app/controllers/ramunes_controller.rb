@@ -66,6 +66,7 @@ class RamunesController < ApplicationController
       # permitメソッドで渡した引数のみがデータベースに保存される
       params.permit(:user_id,
                     :ramune_normal_girl,            :ramune_normal_boy, 
+                    :ramune_melon_girl,             :ramune_melon_boy,
                     :ramune_grape_girl,             :ramune_grape_boy, 
                     :ramune_yogurt_girl,            :ramune_yogurt_boy, 
                     :ramune_strawberry_ver1_girl,   :ramune_strawberry_ver1_boy, 

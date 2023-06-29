@@ -2,32 +2,26 @@
 
 one:
   name: onetaro
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 
 two:
   name: twoJiro
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 
 three:
   name: ThreeSab
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 
 four:
   name: four shiro
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 
 five:
   name: five Goro
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 
 <% 30.times do |n| %>
 user_<%= n %>:
   name:  <%= "User#{n}" %>
-  password_digest: <%= User.digest('password') %>
-  activated_at: <%= Time.zone.now %>
+  password_digest: <%= BCrypt::Password.create('password') %>
 <% end %>
