@@ -1,23 +1,27 @@
 class RamunesController < ApplicationController
   # ユーザーのログインを確認する
-  before_action :logged_in_user, only: :create
+  before_action :logged_in_user, only: [:create, :update]
 
-  # トップページの表示
+  # フエラムネ一覧の表示
   def new
-    # 新しいオブジェクトを生成して@ramuneというインスタンス変数に代入
-    # トップページを開いた時に実行される 新しいトップページ用の箱を作ってるイメージ?
-    @ramune = Ramune.new
+    # ログインしているユーザーのラムネ一覧がある場合
+    if Ramune.exists?(user_id: session[:user_id])
+      # editアクションに移動(編集)
+      @ramune = Ramune.find_by(user_id: session[:user_id])
+      @ramune.reload
+
+      render 'edit'
+    # ログインしているユーザーのラムネ一覧がない場合
+    else
+      # 新しいオブジェクトを生成して@ramuneというインスタンス変数に代入
+      # トフエラムネ一覧を開いた時に実行される 新しいフエラムネ一覧用の箱を作ってるイメージ?
+      @ramune = Ramune.new
+    end
   end
 
   # 新規フエラムネ一覧の登録
   def create
     # 新しいオブジェクトを入力されたパラメーターで生成して@ramuneというインスタンス変数を作成
-    #@ramune = Ramune.new(ramune_params)
-    #@ramune = current_user.ramunes.build(ramune_params)
-    #@micropost.image.attach(params[:micropost][:image])
-    #user_id = User.find_by(id: session[:user_id])
-    #p ramune_params
-    #@ramune = Ramune.new(ramune_params.merge(user_id: user_id))
     @ramune = Ramune.new(ramune_params)
     # データベースに保存できた場合
     if @ramune.save
@@ -38,6 +42,31 @@ class RamunesController < ApplicationController
     end
   end
 
+  # 既にデータベースにある人のフエラムネ一覧の編集
+  def edit
+    #@ramune = Ramune.find_by(user_id: session[:user_id])
+    #@ramune.reload
+  end
+
+  # 既にデータベースにある人のフエラムネ一覧の更新
+  def update
+    # ログインしているユーザーのラムネ一覧を取得
+    @ramune = Ramune.find_by(user_id: session[:user_id])
+    # ラムネ一覧の更新が成功した場合
+    if @ramune.update(ramune_params)
+      # @ramuneをリロードする
+      @ramune.reload
+      # フラッシュメッセージの表示
+      flash[:success] = "更新が完了しました"
+      # ラムネ一覧ページを表示
+      redirect_to ramunelist_url
+    # ラムネ一覧が更新できなかった場合
+    else
+      # ラムネ一覧の更新に失敗した場合ラムネ一覧編集ページを再表示する
+      flash[:danger] = '失敗しました'
+      render 'edit', status: :unprocessable_entity
+    end
+  end
 
 #
 #  # ユーザー情報の表示
