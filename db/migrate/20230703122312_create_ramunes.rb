@@ -2,7 +2,6 @@ class CreateRamunes < ActiveRecord::Migration[7.0]
   def change
     create_table :ramunes do |t|
 
-      t.integer :user_id,                       null: false
       t.integer :ramune_normal_girl,            null: false, default: 0
       t.integer :ramune_normal_boy,             null: false, default: 0
       t.integer :ramune_melon_girl,             null: false, default: 0
@@ -47,10 +46,11 @@ class CreateRamunes < ActiveRecord::Migration[7.0]
       t.integer :ramune_jumpingbattlecola_boy,  null: false, default: 0
       t.integer :ramune_inthefuturecola_girl,   null: false, default: 0
       t.integer :ramune_inthefuturecola_boy,    null: false, default: 0
-
+      t.references :user, null: false, foreign_key: true
+      
       t.timestamps
 
     end
-    add_index  :ramunes, :created_at
+    add_index  :ramunes, [:user_id, :created_at]
   end
 end

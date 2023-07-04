@@ -1,7 +1,5 @@
 <h1>フエラムネ一覧</h1>
 
-  <!-- <div class="spinner-container"> -->
-
     <%= form_with model: @ramune, url: ramunelist_path, local: true do |f| %>
       <% if @ramune.errors.any? %>
         <strong><%= @ramune.errors.count %>個のエラーがあります。</strong>
@@ -14,7 +12,7 @@
 
   <table>
     <tbody>
-      <!-- <%= render 'layouts/header' %> -->
+      <%= render 'layouts/header' %>
       <tr>
         <th>おまけの種類</th>
         <th>女の子用</th>
@@ -138,10 +136,7 @@
       </tr>  
     </tbody>
   </table>
-
-  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
-
-  <!-- </div> -->
   
   <%= button_to "登録", {controller: 'ramunes', action: 'create'} %>
+
 <% end %>

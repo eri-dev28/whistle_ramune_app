@@ -1,20 +1,19 @@
 class RamunesController < ApplicationController
   # ユーザーのログインを確認する
-  before_action :logged_in_user, only: [:create, :update]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update]
 
   # フエラムネ一覧の表示
   def new
     # ログインしているユーザーのラムネ一覧がある場合
     if Ramune.exists?(user_id: session[:user_id])
-      # editアクションに移動(編集)
+      # ログインしているユーザーのラムネ一覧を取得
       @ramune = Ramune.find_by(user_id: session[:user_id])
-      @ramune.reload
-
+      # editアクションに移動(編集)
       render 'edit'
     # ログインしているユーザーのラムネ一覧がない場合
     else
       # 新しいオブジェクトを生成して@ramuneというインスタンス変数に代入
-      # トフエラムネ一覧を開いた時に実行される 新しいフエラムネ一覧用の箱を作ってるイメージ?
+      # フエラムネ一覧を開いた時に実行される 新しいフエラムネ一覧用の箱を作ってるイメージ?
       @ramune = Ramune.new
     end
   end
@@ -32,11 +31,13 @@ class RamunesController < ApplicationController
     else
       # ログインしている場合
       if logged_in?
+        flash[:danger] = '登録に失敗しました'
         # newアクションに遷移 登録画面に戻る
-        # ステータスコードを記入することでerbのエラーメッセージが表示できる
         render 'new'
       else
         flash[:danger] = 'ログインしてください'
+        # newアクションに遷移 登録画面に戻る
+        # ステータスコードを記入することでerbのエラーメッセージが表示できる
         render 'new', status: :unprocessable_entity
         end
     end
@@ -44,8 +45,6 @@ class RamunesController < ApplicationController
 
   # 既にデータベースにある人のフエラムネ一覧の編集
   def edit
-    #@ramune = Ramune.find_by(user_id: session[:user_id])
-    #@ramune.reload
   end
 
   # 既にデータベースにある人のフエラムネ一覧の更新

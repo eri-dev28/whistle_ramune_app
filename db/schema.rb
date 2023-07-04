@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_22_091956) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_03_122312) do
   create_table "ramunes", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.integer "ramune_normal_girl", default: 0, null: false
     t.integer "ramune_normal_boy", default: 0, null: false
     t.integer "ramune_melon_girl", default: 0, null: false
@@ -57,9 +56,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_091956) do
     t.integer "ramune_jumpingbattlecola_boy", default: 0, null: false
     t.integer "ramune_inthefuturecola_girl", default: 0, null: false
     t.integer "ramune_inthefuturecola_boy", default: 0, null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["created_at"], name: "index_ramunes_on_created_at"
+    t.index ["user_id", "created_at"], name: "index_ramunes_on_user_id_and_created_at"
+    t.index ["user_id"], name: "index_ramunes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,4 +70,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_22_091956) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "ramunes", "users"
 end

@@ -95,4 +95,15 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "ユーザーが削除された時フエラムネ一覧も削除されることのテスト" do
+    # ユーザーをデータベースに保存する
+    @user.save
+    # 保存したユーザーのラムネ一覧を作成する
+    @user.build_ramune(ramune_normal_girl: "5").save
+    # ラムネ一覧の数がブロック内の処理によって1つ消えることの確認
+    assert_difference 'Ramune.count', -1 do
+      # ユーザーを削除する
+      @user.destroy
+    end
+  end
 end

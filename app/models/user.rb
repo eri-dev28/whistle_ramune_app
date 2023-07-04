@@ -22,5 +22,6 @@ class User < ApplicationRecord
   # パスワードの制約
   # ・必須(presence)
   # ・長さが最小6文字(length)
-  validates :password, presence: true, length: { minimum: 6 }
+  # allow_nil: trueは対象の値がnilの場合にバリデーションをスキップする
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 end
