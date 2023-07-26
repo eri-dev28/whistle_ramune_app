@@ -16,11 +16,11 @@ class SessionsController < ApplicationController
       reset_session      # ログインの直前に必ずこれを書くこと 他の人が同じPCを使うときなどにログインした人のみ閲覧可能なページを見れてしまうため?
       # ログインする app/helpers/sessions_helper.rbで定義
       log_in user
-      # forwarding_urlがある場合はそこにリダイレクトし、nilの場合はホーム画面に遷移
-      redirect_to forwarding_url || ramunelist_url #root_url
+      # forwarding_urlがある場合はそこにリダイレクトし、nilの場合はラムネ一覧画面に遷移
+      redirect_to forwarding_url || ramunelist_url
     else
       # フラッシュメッセージを表示
-      flash[:danger] = '正しいユーザー名または、パスワードを入力してください'
+      flash.now[:danger] = '正しいユーザー名または、パスワードを入力してください'
       # newアクションに移動(renderだとなぜかフラッシュメッセージが表示されないためredirect_toに変更)
       render 'new', status: :unprocessable_entity
       # ログイン画面に遷移
@@ -33,6 +33,6 @@ class SessionsController < ApplicationController
     # ログインしている場合はログアウトする app/helpers/sessions_helper.rbで両方定義
     log_out if logged_in?
     # ログイン画面に遷移
-    redirect_to login_path
+    redirect_to login_path, status: :see_other
   end
 end

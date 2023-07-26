@@ -1,7 +1,9 @@
 <h1>フエラムネ一覧</h1>
   <%= form_with model: @ramune, url: ramunelist_path, local: true do |f| %>
     <% if @ramune.errors.any? %>
-      <strong><%= @ramune.errors.count %>個のエラーがあります。</strong>
+      <div class="alert alert-danger">
+        <strong><%= @ramune.errors.count %>個のエラーがあります。</strong>
+      </div>
       <ul>
         <% @ramune.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -10,7 +12,7 @@
     <% end %>
     <div class="ramunelist">
       <table>
-        <tbody>
+        <body>
           <%= render 'layouts/header' %>
           <tr>
             <th>おまけの種類</th>
@@ -128,8 +130,9 @@
             <td><input class="spinner" type="number" name="ramune_inthefuturecola_girl" min="0" max="100" value="0"></td>
             <td><input class="spinner" type="number" name="ramune_inthefuturecola_boy" min="0" max="100" value="0"></td>
           </tr>  
-        </tbody>
+        </body>
       </table>
       <%= button_to "登録", {controller: 'ramunes', action: 'create'}, {class: "ramune-button"} %>
+      <!-- <%= f.submit "登録", class: "btn btn-primary" %> -->
     </div>
 <% end %>

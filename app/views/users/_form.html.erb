@@ -1,6 +1,8 @@
 <%= form_with model: @user, url: yield(:url), local: true do |f| %>
   <% if @user.errors.any? %>
-    <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+    <div class="alert alert-danger">
+      <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+    </div>
     <ul>
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>

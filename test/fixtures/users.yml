@@ -5,11 +5,11 @@ one:
   password_digest: <%= BCrypt::Password.create('password') %>
 
 two:
-  name: twoJiro
+  name: twojiro
   password_digest: <%= BCrypt::Password.create('password') %>
 
 three:
-  name: ThreeSab
+  name: threesab
   password_digest: <%= BCrypt::Password.create('password') %>
 
 four:
@@ -17,11 +17,11 @@ four:
   password_digest: <%= BCrypt::Password.create('password') %>
 
 five:
-  name: five Goro
+  name: Five Goro
   password_digest: <%= BCrypt::Password.create('password') %>
 
-<% 30.times do |n| %>
-user_<%= n %>:
-  name:  <%= "User#{n}" %>
-  password_digest: <%= BCrypt::Password.create('password') %>
-<% end %>
+#<% 30.times do |n| %>
+#user_<%= n %>:
+#  name:  <%= "User#{n}" %>
+#  password_digest: <%= BCrypt::Password.create('password') %>
+#<% end %>

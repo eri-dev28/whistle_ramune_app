@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_03_122312) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_085141) do
   create_table "ramunes", force: :cascade do |t|
     t.integer "ramune_normal_girl", default: 0, null: false
     t.integer "ramune_normal_boy", default: 0, null: false

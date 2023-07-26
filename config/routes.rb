@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  root   'ramunes#show'
-  get    '/ramunelist', to: 'ramunes#new'
-  post   '/ramunelist', to: 'ramunes#create'
-  patch  '/ramunelist', to: 'ramunes#update'
+  #root   'ramunes#new'
   get    '/signup',     to: 'users#new'
   post   '/signup',     to: 'users#create'
   get    '/user',       to: 'users#edit'
@@ -13,6 +10,12 @@ Rails.application.routes.draw do
   get    '/login',      to: 'sessions#new'
   post   '/login',      to: 'sessions#create'
   delete '/logout',     to: 'sessions#destroy'
+  get    '/ramunelist', to: 'ramunes#new'
+  #get    '/ramunelist', to: 'ramunes#edit'
+  post   '/ramunelist', to: 'ramunes#create'
+  patch  '/ramunelist', to: 'ramunes#update'
+
+  #resources :ramunelist, only: [:new, :edit]
 
   #resources :user, only: [:new, :create, :edit, :update, :destroy]
 end
