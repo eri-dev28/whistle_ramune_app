@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* プロジェクトのタイトル
+フエラムネおまけ記録
 
-Things you may want to cover:
+* プロジェクトの説明
+フエラムネの50thのおまけの記録をできるアプリです
 
-* Ruby version
+* 構築
+・Ruby          3.2.2
+・Ruby on Rails 7.0.6
+・SCSS
+・HTML
+・VsCode
+・AWS(VPC, EC2, Route53)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* プロジェクトの使用方法
+新規登録またはログインをして自分が所持しているおまけを記録できます。
+ユーザー名とパスワードは変更可能で、アカウント削除もできます。
